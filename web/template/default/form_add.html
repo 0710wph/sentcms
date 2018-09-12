@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$title}</title>
+</head>
+<body>
+<form method="post" action="{:url('form/add')}" class="form form-horizontal">
+    <input type="text" name="model" value="form">
+    <input type="text" name="form_id" value="1">
+    <input type="text" name="status" value="1">
+
+    <input type="datetime" name="update_time" value="">
+    <input type="datetime" name="create_time" value="">
+    <br>
+    <div>{:widget('common/Form/show',array(array('name'=>'uid','title'=>'uid','type'=>'text'),''))}</div>
+    <label class="control-label">备注</label>
+    <div>{:widget('common/Form/show',array(array('name'=>'info','title'=>'备注','type'=>'text'),''))}</div>
+    <label class="control-label">费用</label>
+    <div>{:widget('common/Form/show',array(array('name'=>'feiyong','title'=>'记录费用','type'=>'decimal'),''))}</div>
+    <label class="control-label">类型</label>
+    <div>{:widget('common/Form/show',array(array('name'=>'killtype','title'=>'类型','type'=>'select','option'=>array('1'=>'支出','2'=>'收入')),''))}</div>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

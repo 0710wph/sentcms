@@ -1,0 +1,9 @@
+.container{
+    max-width: 800px;
+}
+.red{
+    color:#f00;
+}
+.icon-arrow-right:before {
+    content: "\e092";
+}

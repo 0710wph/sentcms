@@ -1,0 +1,14 @@
+{include file="public/header" /}
+<div class="container">
+	<h2>欢迎访问记账小贴士</h2>
+	<hr>
+	{if isset($user)}
+		{volist name="user" id="item"}欢迎登录：{$item['username']}{/volist}&nbsp; &nbsp;
+		<a class="btn btn-default" href="{:url('user/login/logout')}">退出</a>
+	{else}
+		<a class="btn btn-default" href="{:url('user/login/index')}">登录</a>
+	{/if}
+	&nbsp; &nbsp;
+	<a class="btn btn-primary" href="{:url('bill')}">我要记账</a>
+</div>
+{include file="public/foot" /}

@@ -1,0 +1,39 @@
+{include file="public/header" /}
+<div class="container">
+    <h2>添加记账</h2>
+    <hr>
+    <form class="form-horizontal" method="post" action="{:url('form/add')}">
+        <div class="hidden">
+            <input type="text" name="model" value="form">
+            <input type="text" name="form_id" value="1">
+            <input type="text" name="status" value="1">
+            <input type="datetime" name="update_time" value="">
+            <input type="datetime" name="create_time" value="">
+            {:widget('common/Form/show',array(array('name'=>'uid','title'=>'uid','type'=>'text'),''))}
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">类型</label>
+            <div class="col-sm-10">
+                {:widget('common/Form/show',array(array('name'=>'killtype','title'=>'类型','type'=>'select','option'=>array('1'=>'支出','2'=>'收入')),''))}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">费用</label>
+            <div class="col-sm-10">
+                {:widget('common/Form/show',array(array('name'=>'feiyong','title'=>'记录费用','type'=>'decimal'),''))}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-10">
+                {:widget('common/Form/show',array(array('name'=>'info','title'=>'备注','type'=>'text'),''))}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+{include file="public/foot" /}

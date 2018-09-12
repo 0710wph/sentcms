@@ -1,0 +1,11 @@
+{include file="public/header" /}
+<div class="container">
+    <h2>会员首页</h2>
+    <hr>
+    {volist name="user" id="item"}
+    <h4>用户名：{$item['username']}&nbsp; &nbsp; <a href="{:url('user/login/logout')}">退出</a></h4>
+    <h4>uid：{$item['uid']}</h4>
+    <h4>邮箱：{$item['email']}</h4>
+    {/volist}
+</div>
+{include file="public/foot" /}
