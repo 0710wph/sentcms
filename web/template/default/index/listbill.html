@@ -4,6 +4,18 @@
     <hr>
     <div class="table-responsive">
         <table class="table">
+            <tr class="info">
+                <td>
+                    时间区间：
+                    <b>
+                        {$dates['mintime']|date='Y-m-d',###}
+                        &nbsp;&nbsp;
+                        <span class="red glyphicon glyphicon-resize-horizontal"></span>
+                        &nbsp;&nbsp;
+                        {$dates['maxtime']|date='Y-m-d',###}
+                    </b>
+                </td>
+            </tr>
             {volist name="feiyong" id="item"}
             <tr class="success">
                 <td>

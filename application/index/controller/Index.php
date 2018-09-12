@@ -69,16 +69,22 @@ class Index extends Front {
         //$where['killtype'] = 1;
         $uid = 2;
         //$sql = "SELECT SUM( feiyong ) , killtype FROM sent_form_form  WHERE uid ={$uid} GROUP BY killtype";
+        //select max(creat_time) as maxtime,min(creat_time) as mintime from sent_form_form where uid = 2
         $feiyong_count = db('form_form')
             ->field('SUM(feiyong) as money,killtype')
             ->where($map)
             ->group('killtype')
             ->select();
+        $dates = db('form_form')
+            ->field('max(create_time) as maxtime,min(create_time) as mintime')
+            ->where($map)
+            ->find();
         $data = array(
-            'uid'   => session('user_auth.uid'),
-            'list' => $list,
-            'page' => $list->render(),
-            'feiyong'   => $feiyong_count
+            'uid'    => session('user_auth.uid'),
+            'list'   => $list,
+            'page'   => $list->render(),
+            'feiyong'=> $feiyong_count,
+            'dates'  => $dates
         );
         $this->assign($data);
         $this->setSeo('我的账单列表-'.config('web_site_title'), config('web_site_keyword'), config('web_site_description'));
