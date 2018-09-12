@@ -4,13 +4,6 @@
     <hr>
     <div class="table-responsive">
         <form action="" class="navbar-form form-inline" method="get">
-
-            <!--<div class="form-group">-->
-                <!--<label class="control-label" for="input-order-id">用户名</label>-->
-                <!--<div class="input-group">-->
-                    <!--<input type="text" name="username" value="{$param['username']|default=''}" placeholder="用户名" class="form-control">-->
-                <!--</div>-->
-            <!--</div>-->
             <div class="form-group">
                 <label class="control-label">开始日期</label>
                 <div class="input-group">
@@ -59,23 +52,21 @@
                 </td>
             </tr>
             {/volist}
-            <tr class="warning"><td colspan="4">&nbsp;</td></tr>
+        </table>
+    </div>
+    {$page}
+    <hr>
+    <div class="table-responsive">
+        <table class="table">
+            {volist name="feiyong" id="item"}
             <tr class="success">
-                <td colspan="4">总收入：{$in}</td>
-            </tr>
-            <tr class="danger">
-                <td colspan="4">总支出：{$out}</td>
-            </tr>
-            <tr class="info">
-                <td colspan="4">
-                    总计：
-                    {php}
-                    echo $in-$out;
-                    {/php}
+                <td>
+                    {if ($item['killtype'] == 1)}总支出：{elseif($item['killtype'] == 2)}总收入：{/if}
+                    {$item['money']}
                 </td>
             </tr>
+            {/volist}
         </table>
-        {$page}
     </div>
 </div>
 {include file="public/foot" /}

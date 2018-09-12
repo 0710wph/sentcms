@@ -64,19 +64,21 @@ class Index extends Front {
             'param'  => $param
         ));
         //总支出
+        // select sum(feiyong) from form_form where uid=2 group by killtype
         $where['uid'] = session('user_auth.uid');
-        $where['killtype'] = 1;
-        $feiyongs_in = db('form_form')->field('SUM(feiyong)')->where($where)->select();
-        //总收入
-        $where2['uid'] = session('user_auth.uid');
-        $where2['killtype'] = 2;
-        $feiyongs_out = db('form_form')->field('SUM(feiyong)')->where($where2)->select();
+        //$where['killtype'] = 1;
+        $uid = 2;
+        //$sql = "SELECT SUM( feiyong ) , killtype FROM sent_form_form  WHERE uid ={$uid} GROUP BY killtype";
+        $feiyong_count = db('form_form')
+            ->field('SUM(feiyong) as money,killtype')
+            ->where($map)
+            ->group('killtype')
+            ->select();
         $data = array(
             'uid'   => session('user_auth.uid'),
             'list' => $list,
             'page' => $list->render(),
-            'out'   => $feiyongs_in[0]['SUM(feiyong)'],
-            'in'  => $feiyongs_out[0]['SUM(feiyong)'],
+            'feiyong'   => $feiyong_count
         );
         $this->assign($data);
         $this->setSeo('我的账单列表-'.config('web_site_title'), config('web_site_keyword'), config('web_site_description'));
