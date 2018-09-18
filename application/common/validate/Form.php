@@ -16,15 +16,18 @@ class Form extends Base {
 	protected $rule = array(
 		'title'   => 'require',
 		'name'   => 'require|checkTable|unique:form|/^[a-zA-Z]\w{0,39}$/',
+        'feiyong'   => 'require|float',
 	);
 	
 	protected $message = array(
 		'title.require'   => '字段标题不能为空！',
+        'feiyong.require'   => '费用不能为空！',
+        'feiyong.float'   =>  '请输入正确的费用',
 		'name.checkTable' => '数据库中有此表',
 	);
 	
 	protected $scene = array(
-		'add'   => 'title, name',
+		'add'   => 'title, name,feiyong',
 		'edit'   => 'title'
 	);
 

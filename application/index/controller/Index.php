@@ -84,7 +84,8 @@ class Index extends Front {
             'list'   => $list,
             'page'   => $list->render(),
             'feiyong'=> $feiyong_count,
-            'dates'  => $dates
+            'dates'  => $dates,
+            'param'  => $param
         );
         $this->assign($data);
         $this->setSeo('我的账单列表-'.config('web_site_title'), config('web_site_keyword'), config('web_site_description'));

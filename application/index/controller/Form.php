@@ -49,11 +49,11 @@ class Form extends Front {
         $attr = model('FormAttr')->getFieldlist($map);
 		if ($request->isPost()) {
 			$data = $request->param();
-			$result = $this->model->save($data);
-			if (false !== $result) {
+            $result = $this->model->saveFront($data);
+			if ('1' == $result) {
 				return $this->success('提交成功！');
 			}else{
-				return $this->error('提交失败！');
+                return $this->error($result,'index/index/bill');
 			}
 		}else{
 			$map['form_id'] = $this->form['id'];

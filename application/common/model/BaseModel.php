@@ -126,6 +126,12 @@ class BaseModel {
                 }
             }
         }
+        // TODO 会员uid入库判断
+        if(session('user_auth.uid')){
+            $this->data['uid'] = session('user_auth.uid');
+        }else{
+            $this->data['uid'] = 0;
+        }
         $this->autoCompleteData($this->auto);
         if (!empty($where)) {
             $this->autoCompleteData($this->update);
@@ -133,20 +139,22 @@ class BaseModel {
             $validate = new Validate($rule, $msg);
             $result   = $validate->check($this->data);
             if (!$result) {
-                $this->error = $validate->getError();
-                return false;
+                return $this->error = $validate->getError();
+                //return false;
             }
-            return $this->where($where)->update($this->data);
+            $this->where($where)->update($this->data);
+            return '1';
         } else {
             $this->autoCompleteData($this->insert);
 
-//            $validate = new Validate($rule, $msg);
-//            $result   = $validate->check($this->data);
-//            if (!$result) {
-//                $this->error = $validate->getError();
-//                return false;
-//            }
-            return $this->insert($this->data);
+            $validate = new Validate($rule, $msg);
+            $result   = $validate->check($this->data);
+            if (!$result) {
+                return $this->error = $validate->getError();
+                //return false;
+            }
+            $this->insert($this->data);
+            return '1';
         }
     }
 
