@@ -112,8 +112,7 @@ class Form extends Admin {
 	 */
 	public function lists($form_id = '') {
 		$form = $this->model->where('id', $form_id)->find();
-
-		$list = M($form['name'], 'form')->order('id desc')->paginate(3);//return new \app\common\model\DiyForm(strtolower($name));
+		$list = M($form['name'], 'form')->order('id desc')->paginate(15);//return new \app\common\model\DiyForm(strtolower($name));
 
 		$data = array(
 			'form_id'  => $form_id,
@@ -144,14 +143,40 @@ class Form extends Admin {
      * 编辑表单数据
      */
     public function editdata(\think\Request $request){
-        $info = M('form', 'form')->where('id', $request->param('id'))->find();
-        $data = array(
-            'info'    => $info,
-            'keyList' => $this->model->editFieldAttr
-        );
-        $this->assign($data);
-        $this->setMeta('编辑表单');
-        return $this->fetch('public/edit');
+        $this->modelform = model('FormForm');
+        if ($this->request->isPost()) {
+            $result = $this->modelform->validate('FormForm.addeditform')->save($request->post(), array('id' => $request->post('id')));
+            if (false !== $result) {
+                return $this->success('修改成功！', url('admin/form/lists',array('form_id' => $this->request->param('form_id'))));
+            } else {
+                return $this->error($this->modelform->getError());
+            }
+        } else{
+            $info = M('form', 'form')->where('id', $request->param('id'))->order('id desc')->find();
+            $data = array(
+                'info'    => $info,
+                'keyList' => $this->modelform->keyList//模板显示的数据
+            );
+            $this->assign($data);
+            $this->setMeta('编辑表单');
+            return $this->fetch('public/edit');
+        }
+    }
+    /**
+     * 删除表单数据
+     */
+    public function deldata(){
+        $id     = $this->getArrayParam('id');
+        if (!$id) {
+            return $this->error('非法操作！');
+        }
+        $this->modelform = model('FormForm');
+        $result = $this->modelform->where('id', $id)->delete();
+        if (false !== $result) {
+            return $this->success('删除成功！');
+        }else{
+            return $this->error($this->Fattr->getError());
+        }
     }
 	/**
 	 * @title 数据导出
