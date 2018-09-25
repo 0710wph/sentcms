@@ -61,6 +61,7 @@ class Form extends Front {
 			$data = array(
 				'attr'    => $attr
 			);
+            $this->setSeo('表单-'.config('web_site_title'), config('web_site_keyword'), config('web_site_description'));
             $this->assign('title',"表单");
 			$this->assign($data);
 			return $this->fetch();
