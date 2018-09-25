@@ -16,19 +16,22 @@ class Form extends Base {
 	protected $rule = array(
 		'title'   => 'require',
 		'name'   => 'require|checkTable|unique:form|/^[a-zA-Z]\w{0,39}$/',
-        'feiyong'   => 'require|float',
+        'leave_hours' => 'require',
+        'feiyong' => 'require|float',
 	);
-	
+
 	protected $message = array(
 		'title.require'   => '字段标题不能为空！',
-        'feiyong.require'   => '费用不能为空！',
-        'feiyong.float'   =>  '请输入正确的费用',
+        'feiyong.require'   => '金额不能为空！',
 		'name.checkTable' => '数据库中有此表',
+        'leave_hours.require'=>'时长不能为空',
+        'feiyong.float'   =>  '请填写正确的金额',
 	);
-	
+
 	protected $scene = array(
-		'add'   => 'title, name,feiyong',
-		'edit'   => 'title'
+		'add'   => 'title, name, leave_hours',
+		'edit'   => 'title',
+        'addeditform'=> 'feiyong',//在控制器进行验证可以调用form.addeditform
 	);
 
 	protected function checkTable($value, $rule, $data){
