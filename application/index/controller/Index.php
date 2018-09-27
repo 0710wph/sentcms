@@ -91,4 +91,16 @@ class Index extends Front {
         $this->setSeo('我的账单列表-'.config('web_site_title'), config('web_site_keyword'), config('web_site_description'));
         return $this->fetch();
     }
+    /**
+     * 测试微信小程序
+     */
+    public function getbill(){
+        $param = $this->request->param();
+        $map['status'] = array('egt', 1);
+        $order           = "id desc";
+        $list = db('form_form')->where($map)->order($order)->paginate(15, false, array(
+            'param'  => $param
+        ));
+        echo json_encode($list);
+    }
 }
